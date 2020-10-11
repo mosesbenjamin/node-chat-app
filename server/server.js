@@ -33,8 +33,8 @@ io.on('connection', (socket)=>{
         users.addUser(socket.id, params.name, params.room)
         
         io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-        socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
-        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`))
+        socket.emit('newMessage', generateMessage('Mavewrick', 'Welcome to the chat app!'));
+        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Mavewrick', `${params.name} has joined.`))
 
         callback();
     })
@@ -53,7 +53,7 @@ io.on('connection', (socket)=>{
         var user = users.getUser(socket.id)
 
         if (user){
-            io.to(user.room).emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+            io.to(user.room).emit('newLocationMessage', generateLocationMessage('Mavewrick', coords.latitude, coords.longitude));
         }
         
     })
@@ -63,7 +63,7 @@ io.on('connection', (socket)=>{
 
         if(user) {
             io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-            io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
+            io.to(user.room).emit('newMessage', generateMessage('Mavewrick', `${user.name} has left`));
         }
     });
 });
